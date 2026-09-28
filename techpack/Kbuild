@@ -1,5 +1,11 @@
 # SPDX-License-Identifier: GPL-2.0-only
 TECHPACK?=y
 
-techpack-dirs := $(shell find $(srctree)/techpack -maxdepth 1 -mindepth 1 -type d -not -name ".*")
+# datarmnet and datarmnet-ext ship without a top-level in-tree Makefile in
+# this OSRC drop (they're DLKM-only, built out-of-tree by the AOSP vendor
+# build via their *_dlkm_vendor_*.mk board files -- see
+# techpack/datarmnet/core/Makefile's KERNEL_SRC-based external module
+# style); auto-including them here fails with "No rule to make target
+# .../Makefile".
+techpack-dirs := $(shell find $(srctree)/techpack -maxdepth 1 -mindepth 1 -type d -not -name ".*" -not -name "datarmnet" -not -name "datarmnet-ext")
 obj-${TECHPACK} += stub/ $(addsuffix /,$(subst $(srctree)/techpack/,,$(techpack-dirs)))
