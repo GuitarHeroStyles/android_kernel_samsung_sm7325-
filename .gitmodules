@@ -1,0 +1,4 @@
+[submodule "SukiSU-Ultra"]
+	path = SukiSU-Ultra
+	url = https://github.com/GuitarHeroStyles/SukiSU-Ultra.git
+	branch = builtin
